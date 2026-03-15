@@ -1,0 +1,61 @@
+{
+  "megaEvents": [
+    {"event": "Барселона-1992", "type": "Олимпиада", "cost": 9.7, "costUnit": "$ млрд", "effect": "Рост туризма на 335%", "tourism": "1.7→7+ млн", "result": "Трансформация города", "success": true},
+    {"event": "Афины-2004", "type": "Олимпиада", "cost": 11, "costUnit": "$ млрд", "effect": "Дефицит 6.1% ВВП", "tourism": "Кратковременный", "result": "«Белые слоны»", "success": false},
+    {"event": "Пекин-2008", "type": "Олимпиада", "cost": 40, "costUnit": "$ млрд", "effect": "+2.5% ВВП Пекина/год", "tourism": "Устойчивый рост", "result": "Масштабная модернизация", "success": true},
+    {"event": "Лондон-2012", "type": "Олимпиада", "cost": 13.3, "costUnit": "$ млрд", "effect": "£28–41 млрд к 2020", "tourism": "Рост", "result": "Регенерация востока", "success": true},
+    {"event": "Сочи-2014", "type": "Олимпиада", "cost": 50, "costUnit": "$ млрд", "effect": "Рост турпотока 2×", "tourism": "3.5→6.5+ млн", "result": "Круглогодичный курорт", "success": true},
+    {"event": "Рио-2016", "type": "Олимпиада", "cost": 20, "costUnit": "$ млрд", "effect": "Возврат $4–4.5 млрд", "tourism": "Кратковременный", "result": "Заброшенные объекты", "success": false},
+    {"event": "Токио-2020", "type": "Олимпиада", "cost": 28, "costUnit": "$ млрд", "effect": "Потеря $800 млн", "tourism": "Нулевой (COVID)", "result": "Убыточный", "success": false},
+    {"event": "Париж-2024", "type": "Олимпиада", "cost": 6.6, "costUnit": "€ млрд", "effect": "+0.07 п.п. ВВП", "tourism": "Вытеснение –1.7%", "result": "Скромный эффект", "success": false},
+    {"event": "Германия-2006", "type": "ЧМ", "cost": 3, "costUnit": "$ млрд", "effect": "$11–12 млрд, 50К мест", "tourism": "Рост", "result": "Успешный кейс", "success": true},
+    {"event": "ЮАР-2010", "type": "ЧМ", "cost": 4, "costUnit": "$ млрд", "effect": "+0.5% ВВП, 415К мест", "tourism": "Рост", "result": "Смешанный", "success": false},
+    {"event": "Россия-2018", "type": "ЧМ", "cost": 11.3, "costUnit": "$ млрд", "effect": "$15 млрд (1% ВВП)", "tourism": "Рост", "result": "Окупаемость?", "success": true},
+    {"event": "Катар-2022", "type": "ЧМ", "cost": 6.5, "costUnit": "$ млрд", "effect": "Часть «Видение 2030»", "tourism": "Рост", "result": "Диверсификация", "success": true}
+  ],
+  "mediaRights": [
+    {"year": 2015, "value": 14.6, "note": "только США"},
+    {"year": 2022, "value": 54.7, "note": "Глобально"},
+    {"year": 2023, "value": 56.0, "note": "Без мега-событий"},
+    {"year": 2024, "value": 60.0, "note": "Олимпиада + Евро"},
+    {"year": 2025, "value": 57.2, "note": "Нечётный год"},
+    {"year": 2030, "value": 73.0, "note": "Прогноз"}
+  ],
+  "inactivityCost": [
+    {"indicator": "Глобальная стоимость", "value": "$67.5 млрд", "year": 2013},
+    {"indicator": "Прямые затраты", "value": "$53.8 млрд", "year": 2013},
+    {"indicator": "Потери производительности", "value": "$13.7 млрд", "year": 2013},
+    {"indicator": "Прогноз к 2030", "value": "$300 млрд", "year": 2030},
+    {"indicator": "Доля расходов (развитые страны)", "value": "70%", "year": 2022},
+    {"indicator": "Возврат на £1 в спорт", "value": "£3.91", "year": 2018}
+  ],
+  "sochi": [
+    {"year": 2012, "tourists": 4.3},
+    {"year": 2013, "tourists": 4.1},
+    {"year": 2014, "tourists": 5.6},
+    {"year": 2016, "tourists": 6.5},
+    {"year": 2021, "tourists": 6.5},
+    {"year": 2023, "tourists": 7.6}
+  ],
+  "sportGDP": [
+    {"region": "Евросоюз", "gdpShare": 2.12, "employment": "5.67 млн (2.72%)"},
+    {"region": "Великобритания", "gdpShare": 3.4, "employment": "1.25 млн (3.9%)"},
+    {"region": "Россия", "gdpShare": 0.3, "employment": "н/д"},
+    {"region": "Глобальный рынок", "gdpShare": null, "employment": null, "marketSize": "$600 млрд"}
+  ],
+  "clubRevenue": [
+    {"source": "Коммерческая выручка", "share": 44, "volume": 4.93},
+    {"source": "Трансляции", "share": 38, "volume": 4.26},
+    {"source": "Матчевый день", "share": 18, "volume": 2.01}
+  ],
+  "roiData": {
+    "averageROI": -38,
+    "averageCost": 2.8,
+    "averageRevenue": 1.7
+  },
+  "womenSport": [
+    {"year": 2023, "revenue": 0.981},
+    {"year": 2024, "revenue": 1.88},
+    {"year": 2025, "revenue": 2.35}
+  ]
+}

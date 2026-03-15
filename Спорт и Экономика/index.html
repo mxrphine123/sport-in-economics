@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Влияние спорта на экономику — Школьный проект</title>
+<meta name="description" content="Интерактивный исследовательский проект о влиянии спорта на экономику. 9 класс, Колесников Алексей Евгеньевич.">
+
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#news" class="logo" aria-label="На главную">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 28L18 8L28 28" stroke="#e10600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="16" r="3" fill="#00d2be"/>
+        <path d="M10 22H26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <path d="M12 26H24" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+      </svg>
+      <div class="logo-text">Спорт <span>&</span> Экономика</div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Основная навигация">
+      <a href="#news" class="nav-link active">Новости</a>
+      <a href="#map" class="nav-link">Карта</a>
+      <a href="#report" class="nav-link">Отчёт</a>
+      <a href="#quiz" class="nav-link">Викторина</a>
+      <a href="#calculator" class="nav-link">Калькулятор</a>
+      <a href="#about" class="nav-link">О проекте</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" data-theme-toggle aria-label="Переключить тему">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger" aria-label="Открыть меню" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="#news" class="nav-link">Новости</a>
+  <a href="#map" class="nav-link">Карта мира</a>
+  <a href="#report" class="nav-link">Отчёт</a>
+  <a href="#quiz" class="nav-link">Викторина</a>
+  <a href="#calculator" class="nav-link">Калькулятор</a>
+  <a href="#about" class="nav-link">О проекте</a>
+</nav>
+<div class="mobile-overlay"></div>
+
+<!-- ═══ HERO BANNER ═══ -->
+<main>
+<section class="hero-banner" id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Исследовательский проект 2026</div>
+    <h1 class="hero-title">Влияние <span>спорта</span> на&nbsp;экономику</h1>
+    <p class="hero-subtitle">Комплексный анализ внутренних и внешних эффектов — от массового спорта до мега-событий мирового масштаба</p>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <span class="hero-stat-value">$600 млрд</span>
+        <span class="hero-stat-label">Глобальный рынок</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-value">48 стран</span>
+        <span class="hero-stat-label">В исследовании</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-value">7–8.7%</span>
+        <span class="hero-stat-label">Темпы роста</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 1: NEWS ═══ -->
+<section id="section-news" class="page-section section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Лента новостей</h2>
+      <p class="section-desc">Актуальные новости о влиянии спорта на экономику</p>
+    </div>
+    <div id="news-filters" class="filter-bar"></div>
+    <div id="news-list" style="display:grid;gap:var(--space-4);"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: MAP ═══ -->
+<section id="section-map" class="page-section section" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Карта мира</h2>
+      <p class="section-desc">Интерактивная карта спортивной экономики — нажмите на страну для подробностей</p>
+    </div>
+    <div id="map-container" class="world-map-wrap">
+      <div id="world-map"></div>
+      <div id="map-tooltip" class="map-tooltip"></div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot legend-detailed"></span> Подробные данные</div>
+        <div class="legend-item"><span class="legend-dot legend-basic"></span> Базовые данные</div>
+        <div class="legend-item"><span class="legend-dot legend-none"></span> Нет данных</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Country Modal -->
+<div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <h3 id="modal-country-title"></h3>
+      <button class="modal-close" onclick="closeModal()" aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-row">
+        <span class="detail-label">Доля спорта в ВВП</span>
+        <span class="detail-value" id="modal-gdp"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Размер рынка</span>
+        <span class="detail-value" id="modal-market"></span>
+      </div>
+      <p class="detail-text" id="modal-facts"></p>
+      <div style="padding:var(--space-3) 0; border-top:1px solid var(--color-border);">
+        <span class="detail-label">Мега-события</span>
+        <p class="detail-text" id="modal-events" style="padding-top:var(--space-2);"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: REPORT ═══ -->
+<section id="section-report" class="page-section section" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Интерактивный отчёт</h2>
+      <p class="section-desc">Комплексный анализ влияния спорта на экономику — графики, данные, выводы</p>
+    </div>
+
+    <div class="report-tabs" role="tablist">
+      <button class="report-tab active" data-panel="intro" role="tab">Введение</button>
+      <button class="report-tab" data-panel="theory" role="tab">Теория</button>
+      <button class="report-tab" data-panel="mass-sport" role="tab">Массовый спорт</button>
+      <button class="report-tab" data-panel="mega" role="tab">Мега-события</button>
+      <button class="report-tab" data-panel="industry" role="tab">Индустрия</button>
+      <button class="report-tab" data-panel="russia" role="tab">Кейс России</button>
+      <button class="report-tab" data-panel="conclusion" role="tab">Заключение</button>
+    </div>
+
+    <!-- Panel: Введение -->
+    <div id="panel-intro" class="report-panel active">
+      <div class="kpi-grid" style="margin-bottom:var(--space-8);">
+        <div class="kpi-card">
+          <div class="kpi-label">Глобальный спортивный рынок</div>
+          <div class="kpi-value">$600 млрд</div>
+          <div class="kpi-sub">Оценка к 2026 г. (PwC)</div>
+        </div>
+        <div class="kpi-card accent-teal">
+          <div class="kpi-label">Темпы роста отрасли</div>
+          <div class="kpi-value">7–8.7%</div>
+          <div class="kpi-sub">В год, опережая средний рост ВВП</div>
+        </div>
+        <div class="kpi-card accent-dark">
+          <div class="kpi-label">Совокупный объём к 2050</div>
+          <div class="kpi-value">$8.8 трлн</div>
+          <div class="kpi-sub">Прогноз ВЭФ (включая смежные отрасли)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Средний ROI мега-событий</div>
+          <div class="kpi-value" style="color:var(--color-primary);">–38%</div>
+          <div class="kpi-sub">Олимпиады + Чемпионаты мира</div>
+        </div>
+      </div>
+      <div style="max-width:72ch;">
+        <p style="margin-bottom:var(--space-4);line-height:1.7;">Спорт в XXI веке — мощная экономическая сила, формирующая миллионы рабочих мест, генерирующая значительную долю ВВП и определяющая инвестиционные потоки на десятки миллиардов долларов. Данное исследование анализирует <strong>внутренние эффекты</strong> (массовый спорт → здоровье → экономия → рост производительности) и <strong>внешние эффекты</strong> (мега-события → инфраструктура → туризм → международная репутация).</p>
+        <p style="margin-bottom:var(--space-4);line-height:1.7;">Результаты спортивных инвестиций неоднозначны: наряду с историями успеха (Барселона-1992, Лондон-2012) существуют примеры провалов (Афины-2004, Рио-2016). Для России, принимавшей Олимпиаду в Сочи (2014) и ЧМ по футболу (2018), вопрос эффективности спортивных инвестиций имеет особую практическую значимость.</p>
+      </div>
+    </div>
+
+    <!-- Panel: Теория -->
+    <div id="panel-theory" class="report-panel">
+      <div style="max-width:72ch;">
+        <h3 style="margin-bottom:var(--space-4);text-transform:none;">Экономические модели оценки спортивных эффектов</h3>
+
+        <div class="highlight-card">
+          <h4>Экономический мультипликатор</h4>
+          <p>Показывает, во сколько раз итоговое воздействие на экономику превышает первоначальные затраты. Складывается из прямого эффекта (расходы), косвенного (закупки у поставщиков) и индуцированного (расходы работников). Организаторы мега-событий систематически завышают мультипликаторы.</p>
+        </div>
+
+        <div class="highlight-card" style="border-left-color:var(--color-success);">
+          <h4>Анализ затрат и выгод (CBA)</h4>
+          <p>Более строгая методология, сопоставляющая все затраты (включая альтернативные издержки) с выгодами. В отличие от мультипликаторного анализа, может давать отрицательные результаты. Пример: CBA Панамериканских соревнований 2005 показал убыток $2,4 млн, тогда как мультипликаторный анализ — прирост $5,6 млн.</p>
+        </div>
+
+        <div class="highlight-card" style="border-left-color:var(--color-secondary);">
+          <h4>ROI (Возврат инвестиций)</h4>
+          <p>Исследование 2022 года (PMC), охватившее все Олимпиады и ЧМ по футболу, показало: средний ROI = –38%, средние затраты = $2,8 млрд, средние доходы = $1,7 млрд. Большинство мега-событий убыточны в чисто финансовом выражении.</p>
+        </div>
+
+        <div class="kpi-grid" style="margin-top:var(--space-6);">
+          <div class="kpi-card">
+            <div class="kpi-label">Средний ROI</div>
+            <div class="kpi-value" style="color:var(--color-primary);">–38%</div>
+          </div>
+          <div class="kpi-card accent-teal">
+            <div class="kpi-label">Средние затраты</div>
+            <div class="kpi-value">$2.8 млрд</div>
+          </div>
+          <div class="kpi-card accent-dark">
+            <div class="kpi-label">Средние доходы</div>
+            <div class="kpi-value">$1.7 млрд</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Средний перерасход</div>
+            <div class="kpi-value">172%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Массовый спорт -->
+    <div id="panel-mass-sport" class="report-panel">
+      <div class="kpi-grid" style="margin-bottom:var(--space-8);">
+        <div class="kpi-card">
+          <div class="kpi-label">Стоимость неактивности (2013)</div>
+          <div class="kpi-value">$67.5 млрд</div>
+          <div class="kpi-sub">Прямые + косвенные затраты</div>
+        </div>
+        <div class="kpi-card accent-teal">
+          <div class="kpi-label">Прогноз к 2030</div>
+          <div class="kpi-value">$300 млрд</div>
+          <div class="kpi-sub">499 млн новых случаев НИЗ</div>
+        </div>
+        <div class="kpi-card accent-dark">
+          <div class="kpi-label">Возврат £1 в спорт</div>
+          <div class="kpi-value">£3.91</div>
+          <div class="kpi-sub">Sport England, 2018</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Рост заработка</div>
+          <div class="kpi-value">+4–17%</div>
+          <div class="kpi-sub">У занимающихся спортом</div>
+        </div>
+      </div>
+      <div style="max-width:72ch;">
+        <p style="margin-bottom:var(--space-4);line-height:1.7;">Внутренние экономические эффекты спорта: <strong>массовый спорт → улучшение здоровья → снижение расходов на здравоохранение → рост производительности → увеличение ВВП</strong>. ВОЗ признаёт физическую неактивность глобальной пандемией: 70% расходов здравоохранения в развитых странах приходится на заболевания, связанные с неактивностью.</p>
+        <p style="margin-bottom:var(--space-4);line-height:1.7;"><strong>Конкретные механизмы экономии в Великобритании:</strong> предотвращение 900 000 случаев диабета (£3,6 млрд), профилактика деменции (£3,5 млрд), предотвращение 30 млн визитов к врачу (£450 млн). Совокупный ежегодный вклад массового спорта — £85,5 млрд.</p>
+        <p style="line-height:1.7;">Занятия спортом повышают заработок на 4–17% (IZA World of Labor). Механизмы: лучшее здоровье, развитие soft skills (командная работа, самодисциплина, стрессоустойчивость), замещение непродуктивного времени.</p>
+      </div>
+    </div>
+
+    <!-- Panel: Мега-события -->
+    <div id="panel-mega" class="report-panel">
+      <div class="chart-container">
+        <h4>Затраты на мега-события ($ млрд)</h4>
+        <div class="chart-canvas-wrap" style="height:450px;">
+          <canvas id="chart-mega-events"></canvas>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-3);">
+          <span style="color:var(--color-success);">■</span> Успешные кейсы &nbsp;
+          <span style="color:var(--color-primary);">■</span> Проблемные кейсы
+        </p>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Событие</th>
+              <th>Тип</th>
+              <th>Затраты</th>
+              <th>Эффект</th>
+              <th>Турпоток</th>
+              <th>Результат</th>
+            </tr>
+          </thead>
+          <tbody id="mega-events-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Panel: Индустрия -->
+    <div id="panel-industry" class="report-panel">
+      <div class="chart-container">
+        <h4>Глобальная стоимость спортивных медиаправ ($ млрд)</h4>
+        <div class="chart-canvas-wrap" style="height:300px;">
+          <canvas id="chart-media-rights"></canvas>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);">
+        <div class="chart-container">
+          <h4>Доходы топ-20 клубов мира</h4>
+          <div class="chart-canvas-wrap" style="height:280px;">
+            <canvas id="chart-club-revenue"></canvas>
+          </div>
+          <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-2);text-align:center;">Совокупная выручка: €11.2 млрд (сезон 2023/24)</p>
+        </div>
+        <div class="chart-container">
+          <h4>Женский спорт: рост выручки ($ млрд)</h4>
+          <div class="chart-canvas-wrap" style="height:280px;">
+            <canvas id="chart-women-sport"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h4>Доля спорта в ВВП по странам (%)</h4>
+        <div class="chart-canvas-wrap" style="height:200px;">
+          <canvas id="chart-gdp"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Кейс России -->
+    <div id="panel-russia" class="report-panel">
+      <div class="kpi-grid" style="margin-bottom:var(--space-8);">
+        <div class="kpi-card">
+          <div class="kpi-label">Инвестиции Сочи-2014</div>
+          <div class="kpi-value">~$50 млрд</div>
+          <div class="kpi-sub">~1.5 трлн ₽</div>
+        </div>
+        <div class="kpi-card accent-teal">
+          <div class="kpi-label">Эффект ЧМ-2018</div>
+          <div class="kpi-value">$15 млрд</div>
+          <div class="kpi-sub">1% ВВП за 2013–2018</div>
+        </div>
+        <div class="kpi-card accent-dark">
+          <div class="kpi-label">Рост турпотока Сочи</div>
+          <div class="kpi-value">×2</div>
+          <div class="kpi-sub">4.3 → 7.6 млн (2012–2023)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Доля спорта в ВВП РФ</div>
+          <div class="kpi-value" style="color:var(--color-primary);">0.3%</div>
+          <div class="kpi-sub">При среднеевропейском 2.12%</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h4>Турпоток Сочи (млн чел.)</h4>
+        <div class="chart-canvas-wrap" style="height:300px;">
+          <canvas id="chart-sochi"></canvas>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-3);">
+          Вертикальная линия — Олимпиада 2014. За 10 лет город принял 64 млн туристов.
+        </p>
+      </div>
+
+      <div style="max-width:72ch;">
+        <h3 style="margin-bottom:var(--space-4);text-transform:none;">Ключевые итоги</h3>
+        <div class="highlight-card">
+          <h4>Сочи-2014: инфраструктурная трансформация</h4>
+          <p>14 спортивных объектов, 260 км дорог, 200 км ж/д, 42 отеля мировых брендов. Город стал круглогодичным курортом с 177 км лыжных трасс. Однако: перерасход бюджета в 4.5× (с $12 до $50 млрд), ежегодное содержание ~60–80 млрд ₽.</p>
+        </div>
+        <div class="highlight-card" style="border-left-color:var(--color-success);">
+          <h4>ЧМ-2018: экономический эффект</h4>
+          <p>Суммарный эффект $15 млрд за 2013–2018 (86% — инвестиции, 14% — туризм). 12 стадионов в 11 городах, модернизация 12 аэропортов. Проблема: окупаемость стадионов оценивается в ~50 лет.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Заключение -->
+    <div id="panel-conclusion" class="report-panel">
+      <div style="max-width:72ch;">
+        <div class="highlight-card">
+          <h4>Массовый спорт — лучшая инвестиция</h4>
+          <p>Физическая неактивность обходится в $67,5 млрд+ ежегодно. Каждый £1 в массовый спорт даёт ~£4 возврата. Занятия спортом повышают заработок на 4–17%. Эффекты требуют системных, а не разовых инвестиций.</p>
+        </div>
+        <div class="highlight-card" style="border-left-color:var(--color-success);">
+          <h4>Мега-события: высокий риск</h4>
+          <p>Средний ROI = –38%, перерасход бюджета = 172%. Успех возможен при интеграции в долгосрочную стратегию (Барселона, Лондон). Провал — при отсутствии плана пост-использования (Афины, Рио, Монреаль).</p>
+        </div>
+        <div class="highlight-card" style="border-left-color:var(--color-secondary);">
+          <h4>Россия: нереализованный потенциал</h4>
+          <p>Доля спорта в ВВП (0,3%) в 7 раз ниже европейского уровня. Сочи трансформировался в успешный курорт, но с огромной стоимостью. ЧМ-2018 дал мощный экономический эффект, но стадионы окупятся нескоро.</p>
+        </div>
+        <div class="highlight-card">
+          <h4>Главный вывод</h4>
+          <p style="font-size:var(--text-base);color:var(--color-text);"><strong>Спорт — амбивалентный экономический инструмент.</strong> Он способен генерировать огромные выгоды, но только при условии рационального планирования, прозрачного управления и долгосрочного видения. Страны, рассматривающие спорт как инвестицию, а не как расход, получают наибольшую экономическую отдачу.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: QUIZ ═══ -->
+<section id="section-quiz" class="page-section section" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Викторина</h2>
+      <p class="section-desc">Проверьте свои знания — 10 вопросов по материалам исследования</p>
+    </div>
+    <div class="quiz-container" id="quiz-content"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: CALCULATOR ═══ -->
+<section id="section-calculator" class="page-section section" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Калькулятор проекта</h2>
+      <p class="section-desc">Оцените экономический эффект спортивного мега-события</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="calc-inputs">
+        <div class="form-group">
+          <label for="calc-event-type">Тип события</label>
+          <select id="calc-event-type">
+            <option value="olympics">Олимпиада</option>
+            <option value="worldcup">ЧМ по футболу</option>
+            <option value="regional">Региональный турнир</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="calc-budget">Бюджет инвестиций ($ млрд)</label>
+          <input type="number" id="calc-budget" value="10" min="0" step="0.5">
+        </div>
+        <div class="form-group">
+          <label for="calc-tourists">Ожидаемый турпоток (тыс. чел.)</label>
+          <input type="number" id="calc-tourists" value="500" min="0" step="50">
+        </div>
+        <div class="form-group">
+          <label for="calc-daily-spend">Средние расходы туриста в день ($)</label>
+          <input type="number" id="calc-daily-spend" value="150" min="0" step="10">
+        </div>
+        <div class="form-group">
+          <label for="calc-duration">Длительность события (дней)</label>
+          <input type="number" id="calc-duration" value="16" min="1" step="1">
+        </div>
+        <div class="form-group">
+          <label for="calc-multiplier">Мультипликатор</label>
+          <div class="range-wrap">
+            <input type="range" id="calc-multiplier" min="1.0" max="3.0" step="0.1" value="1.5">
+            <span class="range-value" id="multiplier-display">1.5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-outputs">
+        <div class="kpi-card">
+          <div class="kpi-label">Прямой эффект</div>
+          <div class="kpi-value" id="result-direct">$0 млрд</div>
+        </div>
+        <div class="kpi-card accent-teal">
+          <div class="kpi-label">Косвенный эффект</div>
+          <div class="kpi-value" id="result-indirect">$0 млрд</div>
+        </div>
+        <div class="kpi-card accent-dark">
+          <div class="kpi-label">Совокупный эффект</div>
+          <div class="kpi-value" id="result-total">$0 млрд</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Оценка ROI</div>
+          <div class="kpi-value" id="result-roi">0%</div>
+        </div>
+
+        <div class="chart-container" style="margin-bottom:0;">
+          <div class="chart-canvas-wrap" style="height:200px;">
+            <canvas id="chart-calculator"></canvas>
+          </div>
+        </div>
+
+        <div class="calc-comparison" id="result-comparison">
+          Введите данные для сравнения с реальными мега-событиями.
+        </div>
+      </div>
+
+      <p class="calc-disclaimer">
+        Калькулятор использует упрощённую модель. Реальные экономические эффекты зависят от множества факторов: качества инфраструктуры, политической стабильности, валютных курсов, пост-событийного использования объектов и др.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: ABOUT ═══ -->
+<section id="section-about" class="page-section section" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <h2>О проекте</h2>
+      <p class="section-desc">Исследовательский проект по экономике, 9 класс</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <h3 style="margin-bottom:var(--space-4);text-transform:none;">Описание проекта</h3>
+        <p>Данный проект представляет комплексный анализ влияния спорта на экономику в современном мире. Исследование охватывает внутренние эффекты (массовый спорт, здоровье, производительность) и внешние эффекты (мега-спортивные события, инфраструктура, туризм).</p>
+        <p>Особое внимание уделено российскому опыту — экономическим последствиям Олимпиады в Сочи (2014) и Чемпионата мира по футболу (2018).</p>
+
+        <h3 style="margin-bottom:var(--space-4);margin-top:var(--space-8);text-transform:none;">Методология</h3>
+        <p>Работа основана на анализе вторичных данных: отчёты международных организаций (Всемирный банк, ВОЗ, МОК, ФИФА), данные государственных статистических органов (Росстат, Eurostat), исследования рецензируемых журналов (The Lancet, Journal of Sports Economics), аналитические материалы консалтинговых компаний (McKinsey, PwC, Deloitte).</p>
+        <p>Применяемые методы: сравнительный анализ, анализ кейсов, синтез эмпирических данных. Используемые экономические модели: экономический мультипликатор, ROI, анализ затрат и выгод (CBA).</p>
+
+        <h3 style="margin-bottom:var(--space-4);margin-top:var(--space-8);text-transform:none;">Основные источники</h3>
+        <ol class="sources-list">
+          <li><strong>1.</strong> PwC. Sports Industry Outlook 2025: Global Sports Survey. — 2024.</li>
+          <li><strong>2.</strong> Deloitte. 2026 Global Sports Industry Outlook. — February 2026.</li>
+          <li><strong>3.</strong> European Commission. Study on the Contribution of Sport to Economic Growth and Employment in the EU. — 2012.</li>
+          <li><strong>4.</strong> Sport England / Sheffield Hallam University. Social Return on Investment of Community Sport and Physical Activity. — 2024.</li>
+          <li><strong>5.</strong> Ding M. et al. The economic burden of physical inactivity // The Lancet. — 2016.</li>
+          <li><strong>6.</strong> WHO. Global Status Report on Physical Activity 2022.</li>
+          <li><strong>7.</strong> Flyvbjerg B. et al. The Oxford Olympics Study 2024 // arXiv. — 2024.</li>
+          <li><strong>8.</strong> Preuss H. The structural deficit of the Olympics and the World Cup // PLOS ONE. — 2022.</li>
+          <li><strong>9.</strong> S&P Global Market Intelligence. Sports Rights in the US to Reach $37 Billion by 2030. — 2025.</li>
+          <li><strong>10.</strong> Deloitte. Football Money League 2025.</li>
+          <li><strong>11.</strong> Deloitte Global. Beyond the Billion-Dollar Barrier: Women's Sports. — March 2025.</li>
+          <li><strong>12.</strong> McKinsey & Company. Sporting Goods 2025: The New Balancing Act. — 2025.</li>
+          <li><strong>13.</strong> Cour des Comptes (France). Rapport sur l'impact des Jeux Olympiques Paris 2024. — 2025.</li>
+          <li><strong>14.</strong> Banque de France. Impact of the Paris Olympics on Q3 2024 Economic Activity. — January 2025.</li>
+          <li><strong>15.</strong> Счётная палата РФ. Расходы на Олимпиаду в Сочи: 324,9 млрд рублей. — 2015.</li>
+        </ol>
+      </div>
+
+      <div>
+        <div class="author-card">
+          <div style="font-size:var(--text-3xl);margin-bottom:var(--space-4);">🎓</div>
+          <div class="author-name">Колесников Алексей Евгеньевич</div>
+          <div class="author-class">Ученик 9 «Д» класса</div>
+          <div style="margin-top:var(--space-4);font-size:var(--text-xs);color:var(--color-text-muted);">
+            Школьный проект по экономике<br>
+            Санкт-Петербург, 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-author">Колесников Алексей Евгеньевич, 9 «Д» класс</div>
+    <div class="footer-project">Школьный проект — Влияние спорта на экономику, 2026</div>
+    <div class="footer-attribution">
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+    </div>
+  </div>
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>
