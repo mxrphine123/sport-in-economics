@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where Does the Threat to Peace Come From</title>
+<meta name="description" content="Interactive map of US and NATO military bases worldwide — 535+ installations across 80+ countries">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="app">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="14" stroke="#c23b3b" stroke-width="2" fill="none"/>
+          <circle cx="16" cy="16" r="5" fill="#c23b3b"/>
+          <line x1="16" y1="2" x2="16" y2="10" stroke="#c23b3b" stroke-width="2"/>
+          <line x1="16" y1="22" x2="16" y2="30" stroke="#c23b3b" stroke-width="2"/>
+          <line x1="2" y1="16" x2="10" y2="16" stroke="#c23b3b" stroke-width="2"/>
+          <line x1="22" y1="16" x2="30" y2="16" stroke="#c23b3b" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="site-title">Where Does the Threat to Peace Come From</span>
+    </div>
+
+    <div class="header-stats" id="headerStats">
+      <div class="stat-chip">
+        <span class="dot total"></span>
+        <span>Total:</span>
+        <span class="num" id="totalCount">—</span>
+      </div>
+      <div class="stat-chip">
+        <span class="dot us"></span>
+        <span>US:</span>
+        <span class="num" id="usCount">—</span>
+      </div>
+      <div class="stat-chip">
+        <span class="dot nato"></span>
+        <span>NATO:</span>
+        <span class="num" id="natoCount">—</span>
+      </div>
+      <div class="stat-chip">
+        <span class="dot both"></span>
+        <span>Countries:</span>
+        <span class="num" id="countryCount">—</span>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <button class="btn-icon" id="heatmapToggle" title="Toggle heatmap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" opacity="0.6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+      </button>
+      <button class="btn-icon mobile-sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-tabs">
+      <button class="sidebar-tab active" data-tab="list">Bases List</button>
+      <button class="sidebar-tab" data-tab="stats">Statistics</button>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="search-section">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search bases by name or country...">
+      </div>
+      <div class="filters">
+        <select class="filter-select" id="filterAffiliation">
+          <option value="">All affiliations</option>
+          <option value="US">US only</option>
+          <option value="NATO">NATO only</option>
+          <option value="US/NATO">US/NATO shared</option>
+        </select>
+        <select class="filter-select" id="filterType">
+          <option value="">All types</option>
+        </select>
+        <select class="filter-select" id="filterCountry">
+          <option value="">All countries</option>
+        </select>
+        <select class="filter-select" id="filterRegion">
+          <option value="">All regions</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Bases List Tab -->
+    <div class="sidebar-content" id="listPanel">
+      <div class="base-count-indicator" id="baseCountLabel">Loading bases...</div>
+      <div class="base-list" id="baseList"></div>
+    </div>
+
+    <!-- Statistics Tab -->
+    <div class="sidebar-content stats-panel" id="statsPanel">
+      <!-- Stat cards -->
+      <div class="stat-section">
+        <div class="stat-section-title">Overview</div>
+        <div class="stat-grid" id="overviewGrid"></div>
+      </div>
+
+      <!-- Region chart -->
+      <div class="stat-section">
+        <div class="stat-section-title">Bases by Region</div>
+        <div class="chart-container">
+          <canvas id="regionChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Type chart -->
+      <div class="stat-section">
+        <div class="stat-section-title">Bases by Type</div>
+        <div class="chart-container">
+          <canvas id="typeChart" height="260"></canvas>
+        </div>
+      </div>
+
+      <!-- Top countries bar chart -->
+      <div class="stat-section">
+        <div class="stat-section-title">Top 15 Host Countries</div>
+        <div id="countryBars" class="stat-bar-chart"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Map -->
+  <div class="map-container">
+    <div id="map"></div>
+
+    <div class="map-legend">
+      <div class="legend-title">Legend</div>
+      <div class="legend-item"><span class="legend-dot us"></span> US Military Base</div>
+      <div class="legend-item"><span class="legend-dot nato"></span> NATO Installation</div>
+      <div class="legend-item"><span class="legend-dot both"></span> US/NATO Shared</div>
+    </div>
+
+    <div class="info-overlay">
+      <div class="info-title">Global Military Presence</div>
+      <div class="info-text">This map displays <strong id="infoTotal">535</strong> known US and NATO military installations across <strong id="infoCountries">80+</strong> countries. Zoom in to explore individual bases, or use the sidebar to search and filter.</div>
+    </div>
+
+    <div class="footer-attr">
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile toggle -->
+<button class="mobile-toggle" id="mobileToggle">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
